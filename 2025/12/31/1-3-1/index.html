@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM 탐색기 만들기</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; padding: 24px; }
+    .box { padding: 16px; border: 1px solid #ddd; border-radius: 12px; max-width: 720px; }
+    #result { margin-top: 14px; padding: 12px; background: #f6f7f9; border-radius: 10px; white-space: pre-line; }
+    button { padding: 10px 14px; border: 0; border-radius: 10px; cursor: pointer; }
+    #myBtn { background: #2f7cff; color: white; }
+    .secondary { background: #333; color: white; margin-left: 8px; }
+    .hint { color: #666; margin-top: 10px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>DOM 탐색기 만들기</h1>
+
+  <div class="box parentBox">
+    <div class="wrapper">
+      <button id="myBtn" class="action primary">내 버튼(myBtn)</button>
+      <button class="secondary btn">다른 버튼</button>
+      <button class="secondary btn">또 다른 버튼</button>
+    </div>
+
+    <div id="result">여기에 결과가 표시됩니다.</div>
+    <div class="hint">버튼을 누르면: tagName, id, className / parentElement / children / querySelector vs querySelectorAll 결과를 보여줍니다.</div>
+  </div>
+
+  <script>
+    // 1) 요소 선택 (querySelector)
+    const btn = document.querySelector("#myBtn");
+    const result = document.querySelector("#result");
+
+    btn.addEventListener("click", () => {
+      // 1. 클릭된 요소 정보
+      const tagName = btn.tagName;      // "BUTTON"
+      const id = btn.id;                // "myBtn"
+      const className = btn.className;  // "action primary"
+
+      // 2. 부모/자식 탐색
+      const parentTag = btn.parentElement.tagName;       // 예: "DIV"
+      const childrenCount = btn.parentElement.children.length; // 형제 포함 개수
+
+      // 3. querySelector vs querySelectorAll 차이
+      const firstSecondary = document.querySelector(".secondary");     // 첫 1개만
+      const allSecondary = document.querySelectorAll(".secondary");    // 전부(노드리스트)
+
+      // 4. 화면에 결과 표시 (동적으로)
+      result.textContent =
+        `tagName: ${tagName}\n` +
+        `id: ${id}\n` +
+        `className: ${className}\n\n` +
+        `parent: ${parentTag}\n` +
+        `parent.children.length: ${childrenCount}\n\n` +
+        `querySelector(".secondary") -> 첫번째: ${firstSecondary.tagName}\n` +
+        `querySelectorAll(".secondary") -> 개수: ${allSecondary.length}`;
+    });
+  </script>
+</body>
+</html>
