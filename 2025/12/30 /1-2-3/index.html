@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>과제 1</title>
+</head>
+<body>
+  <h1>학생 정보 객체 관리</h1>
+
+  <script>
+    // 1. 학생 객체 생성
+    const student = {
+      name: "최승희",
+      age: 21,
+      scores: {
+        math: 90,
+        english: 85
+      }
+    };
+
+    // 2. 동적 속성 접근 함수
+    function getProperty(obj, key) {
+      return obj[key];
+    }
+
+    console.log(getProperty(student, "name"));
+
+    // 3. 평균 계산
+    const average = (student.scores.math + student.scores.english) / 2;
+    console.log("평균 점수:", average);
+
+    // 4. 객체 복사 후 수정
+    const copyStudent = { ...student };
+    copyStudent.age = 21;
+
+    console.log("원본 나이:", student.age);
+    console.log("복사본 나이:", copyStudent.age);
+  </script>
+</body>
+</html>
